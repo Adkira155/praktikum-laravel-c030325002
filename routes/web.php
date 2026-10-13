@@ -1,33 +1,72 @@
 <?php
 
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MatakuliahController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Mahasiswa;
-use App\Models\Matakuliah;
-use App\Models\User;
-use Illuminate\Http\Request;
-
-
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tes', function () { return 'tes'; });
-
-Route::get('/mahasiswa', function () {
-    $data = Mahasiswa::all();
-    return view('mahasiswa.index', compact('data'));
+Route::get('/halo', function () {
+    return 'Halo, ini adalah route pertama saya!';
 });
 
-Route::get('/matakuliah', function () {
-    $data = Matakuliah::with('dosen')->get();
-    return view('matakuliah.index', compact('data'));
+Route::get('/tentang-kami', function () {
+    return 'Halaman Tentang Kami';
 });
-Route::get('/matakuliah/tambah', function () {
-    $dosen = User::all();
-    return view('matakuliah.tambah', compact('dosen'));
+
+Route::get('/profil', function () {
+    return view('profil')
+        ->with('nama', 'Nama Anda')
+        ->with('nim', 'NIM Anda')
+        ->with('prodi', 'Prodi Anda');
 });
-Route::post('/matakuliah', function (Request $request) {
-    Matakuliah::create($request->only(['kode_mk','nama_mk','sks','semester','dosen_id']));
-    return redirect('/matakuliah');
+
+Route::get('/kontak', function () {
+    return 'Halaman Kontak';
+});
+
+Route::get('/tentang', function () {
+    return 'Halaman Tentang';
+});
+
+Route::get('/sapa/{nama?}', function ($nama = 'Tamu') {
+    return "Halo, $nama!";
+});
+
+Route::get('/sapa-view', function () {
+    return view('sapa', [
+        'nama' => 'Ahmad Fauzi',
+        'kontenHtml' => '<strong>Teks Tebal</strong>',
+    ]);
+});
+
+Route::get('/statistik-uji', function () {
+    return view('akademik.statistik');
+});
+
+Route::get('/blade-demo', function () {
+    $mahasiswa = \App\Models\Mahasiswa::take(5)->get();
+    return view('blade-demo', compact('mahasiswa'));
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return 'Dashboard Admin';
+    })->name('dashboard');
+
+    Route::get('/pengguna', function () {
+        return 'Kelola Pengguna';
+    })->name('pengguna');
+});
+
+Route::prefix('akademik')->group(function () {
+    Route::resource('mahasiswa', MahasiswaController::class);
+    Route::resource('matakuliah', MatakuliahController::class)
+        ->only(['index', 'show', 'create', 'store']);
+});
+
+Route::fallback(function () {
+    return response('Halaman yang Anda cari tidak ditemukan.', 404);
 });

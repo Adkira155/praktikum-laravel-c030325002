@@ -1,58 +1,165 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Informasi Akademik
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Proyek akhir Praktikum Routing, View, dan Blade Templating Engine pada Laravel 13.
 
-## About Laravel
+## Identitas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+|                    |                             |
+| ------------------ | --------------------------- |
+| **Nama**           | Adinda Ridha Salsabila      |
+| **NIM**            | C030325002                  |
+| **Mata Kuliah**    | Desain Web                  |
+| **Kelas**          | 3C                          |
+| **Dosen Pengajar** | Arifin Noor Asyikin, ST, MT |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Deskripsi Singkat
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Mini aplikasi Sistem Informasi Akademik dengan dua modul data, yaitu **Mahasiswa** dan **Mata Kuliah**. Setiap modul memiliki halaman daftar (index) dan detail (show) yang terhubung melalui named route, serta memakai satu master layout Blade (`layouts/app.blade.php`).
 
-## Learning Laravel
+## Daftar Route
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Hasil dari `php artisan route:list`:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+|  No | Method    | URI                                   | Nama Route             | Action                                       |
+| --: | --------- | ------------------------------------- | ---------------------- | -------------------------------------------- |
+|   1 | GET/HEAD  | `/`                                   | -                      | Closure (`routes/web.php:7`)                 |
+|   2 | GET/HEAD  | `admin/dashboard`                     | `admin.dashboard`      | Closure (`routes/web.php:55`)                |
+|   3 | GET/HEAD  | `admin/pengguna`                      | `admin.pengguna`       | Closure (`routes/web.php:59`)                |
+|   4 | GET/HEAD  | `akademik/mahasiswa`                  | `mahasiswa.index`      | `MahasiswaController@index`                  |
+|   5 | POST      | `akademik/mahasiswa`                  | `mahasiswa.store`      | `MahasiswaController@store`                  |
+|   6 | GET/HEAD  | `akademik/mahasiswa/create`           | `mahasiswa.create`     | `MahasiswaController@create`                 |
+|   7 | GET/HEAD  | `akademik/mahasiswa/{mahasiswa}`      | `mahasiswa.show`       | `MahasiswaController@show`                   |
+|   8 | PUT/PATCH | `akademik/mahasiswa/{mahasiswa}`      | `mahasiswa.update`     | `MahasiswaController@update`                 |
+|   9 | DELETE    | `akademik/mahasiswa/{mahasiswa}`      | `mahasiswa.destroy`    | `MahasiswaController@destroy`                |
+|  10 | GET/HEAD  | `akademik/mahasiswa/{mahasiswa}/edit` | `mahasiswa.edit`       | `MahasiswaController@edit`                   |
+|  11 | GET/HEAD  | `akademik/matakuliah`                 | `matakuliah.index`     | `MatakuliahController@index`                 |
+|  12 | POST      | `akademik/matakuliah`                 | `matakuliah.store`     | `MatakuliahController@store`                 |
+|  13 | GET/HEAD  | `akademik/matakuliah/create`          | `matakuliah.create`    | `MatakuliahController@create`                |
+|  14 | GET/HEAD  | `akademik/matakuliah/{matakuliah}`    | `matakuliah.show`      | `MatakuliahController@show`                  |
+|  15 | GET/HEAD  | `blade-demo`                          | -                      | Closure (`routes/web.php:49`)                |
+|  16 | GET/HEAD  | `halo`                                | -                      | Closure (`routes/web.php:11`)                |
+|  17 | GET/HEAD  | `kontak`                              | -                      | Closure (`routes/web.php:26`)                |
+|  18 | GET/HEAD  | `profil`                              | -                      | Closure (`routes/web.php:19`)                |
+|  19 | GET/HEAD  | `sapa-view`                           | -                      | Closure (`routes/web.php:38`)                |
+|  20 | GET/HEAD  | `sapa/{nama?}`                        | -                      | Closure (`routes/web.php:34`)                |
+|  21 | GET/HEAD  | `statistik-uji`                       | -                      | Closure (`routes/web.php:45`)                |
+|  22 | GET/HEAD  | `storage/{path}`                      | `storage.local`        | Bawaan Laravel (`FilesystemServiceProvider`) |
+|  23 | PUT       | `storage/{path}`                      | `storage.local.upload` | Bawaan Laravel (`FilesystemServiceProvider`) |
+|  24 | GET/HEAD  | `tentang`                             | -                      | Closure (`routes/web.php:30`)                |
+|  25 | GET/HEAD  | `tentang-kami`                        | -                      | Closure (`routes/web.php:15`)                |
+|  26 | GET/HEAD  | `up`                                  | -                      | Bawaan Laravel (`ApplicationBuilder`)        |
+|  27 | GET/HEAD  | `{fallbackPlaceholder}`               | -                      | Closure fallback (`routes/web.php:70`)       |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Keterangan: route `akademik/mahasiswa/*` dibuat dengan `Route::resource` (7 route), sedangkan `akademik/matakuliah/*` memakai `Route::resource(...)->only(['index', 'show', 'create', 'store'])` (4 route). Route `storage/{path}` dan `up` adalah bawaan Laravel.
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Cara Menjalankan
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+cp .env.example .env
+php artisan key:generate
+# atur koneksi database di file .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD)
+php artisan migrate:fresh --seed
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Buka http://127.0.0.1:8000/akademik/mahasiswa
 
-## Contributing
+## Daftar Route (hasil `php artisan route:list`)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+````text
+EOF
+COLUMNS=200 php artisan route:list --except-vendor --no-ansi >> README.md
+echo '```' >> README.md
+````
 
-## Code of Conduct
+Cek hasilnya:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cat README.md
+```
 
-## Security Vulnerabilities
+Pastikan daftar route muncul rapi di dalam blok `text`. Kalau hasilnya terpotong atau berantakan, jalankan ulang perintah di atas, atau salin manual keluaran `php artisan route:list` ke bagian "Daftar Route".
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> Pakai **Git Bash** untuk perintah ini. Di PowerShell versi lama, tanda `>` menghasilkan file berkode UTF-16 yang tampil rusak di GitHub.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Push ke GitHub
+
+**1. Pastikan remote benar** (ingat typo sebelumnya):
+
+```bash
+git remote -v
+```
+
+URL harus sesuai repo-mu, misalnya `https://github.com/Adkira155/praktikum-laravel-c030325002.git`. Kalau salah:
+
+```bash
+git remote set-url origin https://github.com/USERNAME-ANDA/NAMA-REPO.git
+```
+
+**2. Pastikan `.env` dan `vendor/` tidak ikut:**
+
+```bash
+git status
+```
+
+`.env`, `vendor/`, dan `node_modules/` **tidak boleh** muncul di daftar. Kalau muncul, periksa `.gitignore` (Modul 2 Praktikum 3).
+
+**3. Commit dan push:**
+
+```bash
+git add .
+git commit -m "Modul 3: routing, view, blade"
+git push -u origin main
+```
+
+Saat diminta login: username GitHub dan **Personal Access Token** (bukan password akun). Kalau push sebelumnya sudah berhasil dengan `-u`, cukup `git push`.
+
+**4. Verifikasi:** buka repo di GitHub, lalu cek `README.md` tampil dengan daftar route, folder `resources/views/` berisi `layouts/`, `partials/`, `mahasiswa/`, `matakuliah/`, dan tab **Commits** menampilkan commit "Modul 3". 📸 Screenshot halaman repo dan tab Commits.
+
+**Opsional: commit per praktikum** (riwayat lebih rapi). Setelah selesai tiap praktikum:
+
+```bash
+git add .
+git commit -m "Modul 3 P1: routing dasar"
+```
+
+**Opsional: buat `.zip`** sesuai format pengumpulan. Perintah ini hanya mengemas file yang ter-commit (otomatis tanpa `vendor/`, `node_modules/`, dan `.env`), dan menyimpannya di folder induk:
+
+```bash
+git archive --format=zip --output=../praktikum-laravel-modul3.zip HEAD
+```
+
+---
+
+# Checklist Pengumpulan
+
+- [ ] Folder proyek (`.zip` tanpa `vendor/` dan `node_modules/`) dan/atau link repo GitHub
+- [ ] `README.md` berisi nama, NIM, daftar route, dan cara menjalankan
+- [ ] 📸 P1: `/profil`, `/kontak`, `/tentang`, `route:list`
+- [ ] 📸 P2: `route:list` dengan nama route, `/akademik/mahasiswa`, `/akademik/matakuliah`
+- [ ] 📸 P3: `route:list --name=matakuliah` (4 route), `/akademik/matakuliah/1`
+- [ ] 📸 P4: `/profil`, `/statistik-uji`
+- [ ] 📸 P5: `/blade-demo`, perbandingan `{{ }}` vs `{!! !!}`
+- [ ] 📸 P6: daftar dan detail Mahasiswa serta Mata Kuliah
+- [ ] 📸 P7: tampilan data dan tampilan kosong
+- [ ] 📸 P8: judul tab berbeda per halaman, file `partials/navbar.blade.php`
+- [ ] 📸 Repo GitHub dan tab Commits
+- [ ] Jawaban tertulis: alur request (P1), nested view dan Controller vs View (P4), `{{ }}` vs `{!! !!}` (P5), `$loop` (P7), manfaat layout (P8), perbandingan route (P3)
+
+---
+
+# Troubleshooting Cepat
+
+| Error                                     | Penyebab & solusi                                                                                                              |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Route [matakuliah.index] not defined`    | Layout/view dipakai sebelum route resource matakuliah dibuat (P3 Tugas Mandiri). Cek `route:list`.                             |
+| `View [mahasiswa.index] not found`        | Nama file/folder view salah. Harus `resources/views/mahasiswa/index.blade.php`.                                                |
+| `Undefined variable $mahasiswa`           | Controller belum mengirim `compact('mahasiswa')`, atau view dibuka lewat route lain.                                           |
+| `Class "App\Models\Matakuliah" not found` | Model dari Modul 1 belum ada. Buat dengan `php artisan make:model Matakuliah`, lalu lengkapi `$fillable` dan relasi `dosen()`. |
+| `Attempt to read property "name" on null` | Data tanpa dosen. Pakai `{{ $mk->dosen->name ?? '-' }}`.                                                                       |
+| Halaman 404 pada `/mahasiswa`             | URL sekarang `/akademik/mahasiswa` (ada prefix `akademik`).                                                                    |
+| Perubahan route tidak terbaca             | Jalankan `php artisan route:clear` lalu `php artisan view:clear`.                                                              |
+| `Repository not found` saat push          | URL remote salah atau repo belum dibuat. Perbaiki dengan `git remote set-url origin ...`.                                      |
