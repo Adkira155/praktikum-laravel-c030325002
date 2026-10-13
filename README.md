@@ -136,18 +136,18 @@ git archive --format=zip --output=../praktikum-laravel-modul3.zip HEAD
 
 # Checklist Pengumpulan
 
-- [ ] Folder proyek (`.zip` tanpa `vendor/` dan `node_modules/`) dan/atau link repo GitHub
-- [ ] `README.md` berisi nama, NIM, daftar route, dan cara menjalankan
-- [ ] 📸 P1: `/profil`, `/kontak`, `/tentang`, `route:list`
-- [ ] 📸 P2: `route:list` dengan nama route, `/akademik/mahasiswa`, `/akademik/matakuliah`
-- [ ] 📸 P3: `route:list --name=matakuliah` (4 route), `/akademik/matakuliah/1`
-- [ ] 📸 P4: `/profil`, `/statistik-uji`
-- [ ] 📸 P5: `/blade-demo`, perbandingan `{{ }}` vs `{!! !!}`
-- [ ] 📸 P6: daftar dan detail Mahasiswa serta Mata Kuliah
-- [ ] 📸 P7: tampilan data dan tampilan kosong
-- [ ] 📸 P8: judul tab berbeda per halaman, file `partials/navbar.blade.php`
-- [ ] 📸 Repo GitHub dan tab Commits
-- [ ] Jawaban tertulis: alur request (P1), nested view dan Controller vs View (P4), `{{ }}` vs `{!! !!}` (P5), `$loop` (P7), manfaat layout (P8), perbandingan route (P3)
+- [✔] Folder proyek (`.zip` tanpa `vendor/` dan `node_modules/`) dan/atau link repo GitHub
+- [✔] `README.md` berisi nama, NIM, daftar route, dan cara menjalankan
+- [✔] 📸 P1: `/profil`, `/kontak`, `/tentang`, `route:list`
+- [✔] 📸 P2: `route:list` dengan nama route, `/akademik/mahasiswa`, `/akademik/matakuliah`
+- [✔] 📸 P3: `route:list --name=matakuliah` (4 route), `/akademik/matakuliah/1`
+- [✔] 📸 P4: `/profil`, `/statistik-uji`
+- [✔] 📸 P5: `/blade-demo`, perbandingan `{{ }}` vs `{!! !!}`
+- [✔] 📸 P6: daftar dan detail Mahasiswa serta Mata Kuliah
+- [✔] 📸 P7: tampilan data dan tampilan kosong
+- [✔] 📸 P8: judul tab berbeda per halaman, file `partials/navbar.blade.php`
+- [✔] 📸 Repo GitHub dan tab Commits
+- [✔] Jawaban tertulis: alur request (P1), nested view dan Controller vs View (P4), `{{ }}` vs `{!! !!}` (P5), `$loop` (P7), manfaat layout (P8), perbandingan route (P3)
 
 ---
 

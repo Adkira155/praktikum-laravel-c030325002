@@ -18,9 +18,9 @@ Route::get('/tentang-kami', function () {
 
 Route::get('/profil', function () {
     return view('profil')
-        ->with('nama', 'Nama Anda')
-        ->with('nim', 'NIM Anda')
-        ->with('prodi', 'Prodi Anda');
+        ->with('nama', 'Adinda Ridha Salsabila')
+        ->with('nim', 'C030325002')
+        ->with('prodi', 'Teknik Informatika');
 });
 
 Route::get('/kontak', function () {
