@@ -15,4 +15,6 @@ class Matakuliah extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'dosen_id');
     }
+
+    public function nilai() { return $this->hasMany(NilaiMatakuliah::class); }
 }

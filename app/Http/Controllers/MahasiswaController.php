@@ -18,10 +18,27 @@ class MahasiswaController extends Controller
         return 'create: form tambah mahasiswa';
     }
 
+    // public function store(Request $request)
+    // {
+    //     return 'store: simpan data baru';
+    // }
+
     public function store(Request $request)
     {
-        return 'store: simpan data baru';
+        $nama = $request->input('nama');
+        $nim  = $request->input('nim');
+        return "Data yang diterima -> NIM: {$nim}, Nama: {$nama}";
     }
+
+    public function cariMahasiswa(Request $request)
+    {
+        $keyword = $request->query('nama');
+        if (!$keyword) {
+            return "Silakan masukkan kata kunci nama pada form pencarian.";
+        }
+        return "Konfirmasi: Anda sedang mencari data mahasiswa dengan kata kunci: <strong>{$keyword}</strong>";
+    }
+
 
     public function show(Mahasiswa $mahasiswa)
     {
@@ -41,5 +58,14 @@ class MahasiswaController extends Controller
     public function destroy($id)
     {
         return 'destroy: hapus data id ' . $id;
+    }
+
+    public function apiIndex()
+    {
+        return response()->json([
+            'status' => 'sukses',
+            'pesan' => 'Ini contoh response JSON dari Controller',
+            'penulis' => 'Adinda Ridha Salsabila',
+        ]);
     }
 }

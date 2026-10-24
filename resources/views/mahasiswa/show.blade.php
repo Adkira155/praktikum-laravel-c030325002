@@ -12,4 +12,15 @@
 
 <a href="{{ route('mahasiswa.index') }}">&laquo; Kembali ke Daftar</a>
 
+<hr>
+<h3>Daftar Nilai Akademik:</h3>
+<ul>
+    @forelse ($mahasiswa->nilai as $n)
+        <li>{{ $n->matakuliah->nama_mk ?? '-' }} ({{ $n->matakuliah->kode_mk ?? '' }}): <strong>{{ $n->nilai }}</strong></li>
+    @empty
+        <li><em>Belum ada catatan nilai.</em></li>
+    @endforelse
+</ul>
+
+
   @endsection
